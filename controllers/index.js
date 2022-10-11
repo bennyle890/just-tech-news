@@ -1,5 +1,8 @@
 const router = require('express').Router();
+const homeRoutes = require('./home-routes.js');
 const { Comment } = require('../models');
+
+router.use('/', homeRoutes);
 
 router.get('/', (req, res) => {
 
