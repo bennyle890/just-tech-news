@@ -1,11 +1,25 @@
 const router = require('express').Router();
+const { Comment } = require('../models');
 
-const apiRoutes = require('./api');
+router.get('/', (req, res) => {
 
-router.use('/api', apiRoutes);
+});
 
-router.use((req, res) => {
-  res.status(404).end();
+router.post('/', (req, res) => {
+    Comment.create({
+        comment_text: req.body.comment_text,
+        user_id: req.body.user_id,
+        post_id: req.body.post_id
+      })
+        .then(dbCommentData => res.json(dbCommentData))
+        .catch(err => {
+          console.log(err);
+          res.status(400).json(err);
+        });
+});
+
+router.delete('/:id', (req, res) => {
+
 });
 
 module.exports = router;
